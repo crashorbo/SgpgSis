@@ -1,0 +1,38 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Docente
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-4">
+                <a href="{{ path('backend_reporte_listado') }}" class="btn btn-primary">Listado Proyecto Estudiantes</a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="btn btn-primary">Listado Proyecto Especialidades</a>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+{% endblock %}

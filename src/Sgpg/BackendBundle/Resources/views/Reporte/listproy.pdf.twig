@@ -1,0 +1,19 @@
+<pdf>
+    <dynamic-page>
+        <h1>Ingenieria de Sistemas e Informatica</h1>
+        <table>
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td height="12" padding-left="10">Postulante</td>
+                <td padding-left="10">Proyecto</td>
+                <td padding-left="10">Fecha de Creacion Proyecto</td>
+            </tr>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.estudiante }}</td>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{{ entity.fechaCreacion | date('d - m - Y') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </dynamic-page>
+</pdf>

@@ -1,0 +1,3 @@
+frontend_portada:
+    pattern:  /
+    defaults: { _controller: FrontendBundle:Default:index }

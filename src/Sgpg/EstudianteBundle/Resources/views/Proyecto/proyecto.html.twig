@@ -1,0 +1,95 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Estudiante - Proyecto
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('estudiante_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('estudiante_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('estudiante_portada') }}">Estudiante</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('estudiante_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('estudiante_proyecto') }}" class="list-group-item active">Proyecto</a>
+        <a href="{{ path('estudiante_seguimiento') }}" class="list-group-item">Seguimientos</a>
+        <a href="{{ path('estudiante_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    {% if proyecto == null %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <a href="{{ path('estudiante_proyecto_nuevo') }}" class="btn btn-primary boton-fix" role="button">Nuevo</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if proyecto != null %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos Del Proyecto</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <td>Proyecto ID:</td>
+                    <td>{{proyecto.id}}</td>
+                </tr>
+                <tr>
+                    <td>Nombre:</td>
+                    <td>{{proyecto.nombre}}</td>
+                </tr>
+                <tr>
+                    <td>Especialidad:   </td>
+                    <td>{{proyecto.especialidad}}</td>
+                </tr>
+                <tr>
+                    <td>Descripcion:</td>
+                    <td>{{proyecto.descripcion}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha Creacion:</td>
+                    <td>{{proyecto.fechaCreacion|date('Y-m-d')}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha Limite Presentacion: Le quedan <b>{{fecharest}}</b> dias para la culminacion de su proyecto</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tutor</h3>
+        </div>
+        <div class="panel-body">
+            {{proyecto.tutor}}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tribunales</h3>
+        </div>
+        <div class="panel-body">
+            {% for tribunal in tribunales %}
+                <p>{{tribunal.tribunal}} </p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

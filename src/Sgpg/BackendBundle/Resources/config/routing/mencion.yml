@@ -1,0 +1,23 @@
+backend_mencion_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Mencion:index }
+
+backend_mencion_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Mencion:nuevo }
+
+backend_select_menciones:
+    pattern:    /menciones
+    defaults:   { _controller: BackendBundle:Mencion:menciones }
+
+backend_mencion_ver:
+    pattern:    /ver/{mencion_id}
+    defaults:   { _controller: BackendBundle:Mencion:ver }
+
+backend_mencion_editar:
+    pattern:    /editar/{mencion_id}
+    defaults:   { _controller: BackendBundle:Mencion:editar }
+
+backend_mencion_eliminar:
+    pattern:    /eliminar/{mencion_id}
+    defaults:   { _controller: BackendBundle:Mencion:eliminar }

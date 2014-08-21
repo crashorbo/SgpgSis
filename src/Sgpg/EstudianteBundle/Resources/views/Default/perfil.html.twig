@@ -1,0 +1,80 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Estudiante - Inicio
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('estudiante_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('estudiante_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('estudiante_portada') }}">Estudiante</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('estudiante_portada') }}" class="list-group-item active">Inicio</a>
+        <a href="{{ path('estudiante_proyecto') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('estudiante_seguimiento') }}" class="list-group-item">Seguimientos</a>
+        <a href="{{ path('estudiante_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Perfil Estudiante</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <tr>
+                    <td>Nombres:</td>
+                    <td>{{usuario.nombres}}</td>
+                </tr>
+                <tr>
+                    <td>Apellido Paterno:</td>
+                    <td>{{usuario.apPaterno}}</td>
+                </tr>
+                <tr>
+                    <td>Apellido Materno:</td>
+                    <td>{{usuario.apMaterno}}</td>
+                </tr>
+                <tr>
+                    <td>Cedula de Identidad:</td>
+                    <td>{{usuario.ci}}</td>
+                </tr>
+                <tr>
+                    <td>Telefono:</td>
+                    <td>{{usuario.telefono}}</td>
+                </tr>
+                <tr>
+                    <td>Celular:</td>
+                    <td>{{usuario.celular}}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{usuario.email}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de Registro</td>
+                    <td>{{usuario.fechaRegistro|date('d-M-Y')}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-9">
+                <button class="btn btn-warning">Editar Perfil</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

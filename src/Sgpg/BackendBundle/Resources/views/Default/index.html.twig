@@ -1,0 +1,96 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+{% block mijs %}
+    <script type="text/javascript">
+        $(function () {
+            var especialidades = [];
+            var porcentajes = [];
+            {% for resultado in resultados %}
+                especialidades.push("{{ resultado.nombre }}");
+                porcentajes.push({{ resultado.porcentaje }});
+            {% endfor %}
+            $('#charts').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Cuadro de Proyectos'
+                },
+                xAxis: {
+                    categories: especialidades
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Porcentaje de Proyectos Por Especialidad'
+                    }
+                },
+                legend: {
+                    reversed: true
+                },
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    }
+                },
+                series: [ {
+                    name: 'Porcentaje %',
+                    data: porcentajes
+                }]
+            });
+        });
+
+
+    </script>
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item active">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    <h1 class="text-center"><img class="img-responsive" src="{{ asset('bundles/backend/img/logosistemas.png') }}" alt=""></h1>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-2">
+                    <h1 class="text-center"><img class="img-responsive" src="{{ asset('bundles/backend/img/LogoInf.gif') }}" alt=""></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="charts" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-primary" onclick="javascript:window.open('{{ path('backend_reporte_listado') }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Listado Proyecto Estudiantes</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-primary" onclick="javascript:window.open('{{ path('backend_reporte_listesp') }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');">Listado Proyecto Especialidades</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Docente - Tutoria
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('docente_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('docente_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('docente_portada') }}">Docente</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('docente_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('docente_proyecto') }}" class="list-group-item">Proyectos</a>
+        <a href="{{ path('docente_tutoria') }}" class="list-group-item">Tutorias</a>
+        <a href="{{ path('docente_defensa') }}" class="list-group-item active">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lista de Defensas</h3>
+        </div>
+        <div class="panel-body">
+            {% for tribunal in tribunales %}
+                {% for  defhor in tribunal.proyecto.defhors %}
+                    <li class="list-group-item">
+                        <p>Defensa Programada para el dia <b>{{ defhor.horario.diaReal }} {{ defhor.fecha|date('d-m-Y') }} de horas: {{ defhor.horario.horaInicio|date('h:m') }} a {{ defhor.horario.horaFinal|date('h:m') }}</b></p>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

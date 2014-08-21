@@ -1,0 +1,11 @@
+backend_proyecto_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Proyecto:index }
+
+backend_proyecto_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Proyecto:nuevo }
+
+backend_proyecto_ver:
+    pattern:    /ver/{proyecto_id}
+    defaults:   { _controller: BackendBundle:Proyecto:ver }

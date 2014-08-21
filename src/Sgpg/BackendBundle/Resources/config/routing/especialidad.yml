@@ -1,0 +1,19 @@
+backend_especialidad_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Especializacion:index }
+
+backend_especialidad_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Especializacion:nuevo }
+
+backend_especialidad_ver:
+    pattern:    /ver/{especialidad_id}
+    defaults:   { _controller: BackendBundle:Especializacion:ver }
+
+backend_especialidad_editar:
+    pattern:    /editar/{especialidad_id}
+    defaults:   { _controller: BackendBundle:Especializacion:editar }
+
+backend_especialidad_eliminar:
+    pattern:    /eliminar/{especialidad_id}
+    defaults:   { _controller: BackendBundle:Especializacion:eliminar }

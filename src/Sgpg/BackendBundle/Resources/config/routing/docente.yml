@@ -1,0 +1,19 @@
+backend_docente_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Docente:index }
+
+backend_docente_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Docente:nuevo }
+
+backend_docente_ver:
+    pattern:    /ver/{docente_id}
+    defaults:   { _controller: BackendBundle:Docente:ver }
+
+backend_docente_editar:
+    pattern:    /editar/{docente_id}
+    defaults:   { _controller: BackendBundle:Docente:editar }
+
+backend_docente_eliminar:
+    pattern:    /eliminar/{docente_id}
+    defaults:   { _controller: BackendBundle:Docente:eliminar }

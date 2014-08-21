@@ -1,0 +1,99 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Menciones
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item active">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-3">
+                <div class="control-group">
+                    <label class="control-label" for="selectCarrera">Carrera</label>
+                        <select id="selectCarrera" class="form-control">
+                            <option value="">Seleccionar</option>
+                            {% for carrera in carreras %}
+                                <option value="{{ carrera.id }}">{{ carrera.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-3">
+                    <a href="{{ path('backend_mencion_nuevo') }}" class="btn btn-primary boton-fix" role="button">Nuevo</a>
+                </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Menciones</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mencion in menciones %}
+                        <tr>
+                            <td>
+                                {{mencion.nombre}}
+                            </td>
+                            <td>
+                                {{ mencion.estado }}
+                            </td>
+                            <td class="text-right">
+                                <a href="{{ path('backend_mencion_ver', {'mencion_id': mencion.id }) }}" class="btn btn-success" role="button">Ver</a>
+                                <a href="{{ path('backend_mencion_editar', {'mencion_id': mencion.id }) }}" class="btn btn-warning" role="button">Editar</a>
+                            </td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+        $("#selectCarrera").change(function(){
+            var data = {
+                carrera_id: $(this).val()
+            };
+
+            $.ajax({
+                type: 'post',
+                url: '{{ path("backend_select_menciones") }}',
+                data: data,
+                success: function(data) {
+                    $('#carrera_menciones').html(data);
+                }
+            });
+        });
+
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Docente
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item ">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item ">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item active">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if docente.activo %}
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><b>Id:</b></td> <td>{{ docente.id }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Carrera:</b></td> <td>{{ docente.carrera }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Nombres:</b></td> <td>{{ docente.nombres }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Apellido Paterno:</b></td> <td>{{ docente.apPaterno }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Apellido Materno:</b></td> <td>{{ docente.apMaterno }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>C.I.:</b></td> <td>{{ docente.ci}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Telefono:</b></td> <td>{{ docente.telefono}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Celular:</b></td> <td>{{ docente.celular}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email:</b></td> <td>{{ docente.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a type="button" class="btn btn-warning" href="{{ path('backend_docente_editar', {'docente_id': docente.id }) }}">Editar</a>
+                <a type="button" class="btn btn-danger" class="btn btn-danger" href="{{ path('backend_docente_eliminar', {'docente_id': docente.id}) }}">Eliminar</a>
+                {% else %}
+                    <p>Este Docente ha sido eliminado, desea volver a activarlo?</p>
+                    <a type="button" class="btn btn-success" href="{{ path('backend_docente_eliminar', {'docente_id': docente.id }) }} ">Aceptar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

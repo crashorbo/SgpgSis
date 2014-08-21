@@ -1,0 +1,63 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Docente - Tutoria
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('docente_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('docente_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('docente_portada') }}">Docente</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('docente_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('docente_proyecto') }}" class="list-group-item">Proyectos</a>
+        <a href="{{ path('docente_tutoria') }}" class="list-group-item active">Tutorias</a>
+        <a href="{{ path('docente_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+   <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tutorias</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <th>Codigo</th>
+                <th>Postulante</th>
+                <th>Proyecto</th>
+                <th>Acciones</th>
+                </thead>
+                <tbody>
+                    {% for proyecto in proyectos %}
+                        <tr>
+                            <td>
+                                {{ proyecto.id }}
+                            </td>
+                            <td>
+                                {{ proyecto.estudiante }}
+                            </td>
+                            <td>
+                                {{ proyecto  }}
+                            </td>
+                            <td class="text-right">
+                                <a href="{{ path('docente_tutoria_ver',{'proyecto_id': proyecto.id}) }}" class="btn btn-info" role="button">Ver</a>
+                            </td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

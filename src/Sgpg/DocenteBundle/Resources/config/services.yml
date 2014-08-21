@@ -1,0 +1,7 @@
+parameters:
+#    docente.example.class: Sgpg\DocenteBundle\Example
+
+services:
+#    docente.example:
+#        class: %docente.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

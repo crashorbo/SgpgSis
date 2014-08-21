@@ -1,0 +1,78 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Docente
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item ">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item ">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item active">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form action="{{ path('backend_docente_nuevo') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal" role="form">
+                    {{ form_errors(form) }}
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Carrera</label>
+                        <div class="col-sm-8">
+                            {{ form_errors(form.carrera) }}
+                            {{ form_widget(form.carrera, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Nombres</label>
+                        <div class="col-sm-8">
+                            {{ form_errors(form.nombres) }}
+                            {{ form_widget(form.nombres, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Apellido Paterno</label>
+                        <div class="col-sm-8">
+                            {{ form_errors(form.apPaterno) }}
+                            {{ form_widget(form.apPaterno, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Apellido Materno</label>
+                        <div class="col-sm-8">
+                            {{ form_errors(form.apMaterno) }}
+                            {{ form_widget(form.apMaterno, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Cedula Identidad</label>
+                        <div class="col-sm-8">
+                            {{ form_errors(form.ci) }}
+                            {{ form_widget(form.ci, { 'attr': {'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    {{ form_widget(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

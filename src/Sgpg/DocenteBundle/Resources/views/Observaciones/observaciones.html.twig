@@ -1,0 +1,115 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Docente - Proyecto
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('docente_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('docente_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('docente_portada') }}">Docente</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('docente_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('docente_proyecto') }}" class="list-group-item active">Proyectos</a>
+        <a href="{{ path('docente_tutoria') }}" class="list-group-item">Tutorias</a>
+        <a href="{{ path('docente_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos Del Seguimiento</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Id del Proyecto</td>
+                    <td>{{ seguimiento.proyecto.id }}</td>
+                </tr>
+                <tr>
+                    <td>Nombre del Proyecto:</td>
+                    <td>{{ seguimiento.proyecto.nombre }}</td>
+                </tr>
+                <tr>
+                    <td>Descripcion del Proyecto</td>
+                    <td>{{ seguimiento.proyecto.descripcion }}</td>
+                </tr>
+                <tr>
+                    <td>Tipo de Seguimiento:</td>
+                    <td>{{ seguimiento.tipo }}</td>
+                </tr>
+                <tr>
+                    <td>Descripcion del Seguimiento</td>
+                    <td>{{ seguimiento.descripcion }}</td>
+                </tr>
+                <tr>
+                    <td>Archivo del Seguimiento</td>
+                    <td><a type = "button" class="btn btn-info" onclick="javascript:window.open('{{ asset(directorio_seguimientos ~ seguimiento.rutaArchivo) }}',null,'height=500,width=700,status=no,toolbar=no,menubar=no,location=no,scrollbars=yes');" href="#" target="_Blank">Ver Archivo</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+            <hr/>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#Observacion">Agregar Observacion</button>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Observaciones</h3>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Descripcion</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for observacion in seguimiento.observaciones %}
+                <tr>
+                    <td>{{observacion.fechaCreacion|date('d-M-Y')}}</td>
+                    <td>{{observacion.descripcion}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="Observacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Observacion</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('docente_observaciones', {'seguimiento_id': seguimiento.id})}}" method="POST" {{ form_enctype(form) }} class="form-horizontal" role="form">
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            <label for="input" class="col-sm-4 control-label">Descripcion</label>
+                            <div class="col-sm-8">
+                                {{ form_errors(form.descripcion) }}
+                                {{ form_widget(form.descripcion, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        {{ form_widget(form) }}
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}

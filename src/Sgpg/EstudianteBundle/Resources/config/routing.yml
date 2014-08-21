@@ -1,0 +1,43 @@
+estudiante_portada:
+    pattern:   /
+    defaults:  { _controller: EstudianteBundle:Default:index }
+
+estudiante_perfil:
+    pattern:    /perfil
+    defaults:   { _controller: EstudianteBundle:Default:perfil }
+
+estudiante_login:
+    pattern:   /login
+    defaults:  { _controller: EstudianteBundle:Default:login }
+
+estudiante_proyecto:
+    pattern:    /proyecto
+    defaults:   { _controller: EstudianteBundle:Proyecto:proyecto }
+
+estudiante_proyecto_nuevo:
+    pattern:    /proyecto/nuevo
+    defaults:   { _controller: EstudianteBundle:Proyecto:nuevoproy }
+
+estudiante_seguimiento:
+    pattern:    /seguimiento
+    defaults:   { _controller: EstudianteBundle:Seguimiento:seguimiento }
+
+estudiante_seguimiento_nuevo:
+    pattern:    /seguimiento/nuevo
+    defaults:   { _controller: EstudianteBundle:Seguimiento:nuevo }
+
+estudiante_observacion:
+  pattern:  /{seguimiento_id}/observacion
+  defaults: { _controller: EstudianteBundle:Seguimiento:observacion }
+
+estudiante_defensa:
+    pattern:    /defensa
+    defaults:   { _controller: EstudianteBundle:Defensa:defensa }
+
+# Ruta para la acción que comprueba el login de la extranet
+estudiante_login_check:
+    pattern:   /login_check
+
+# Ruta para la acción de logout de la extranet
+estudiante_logout:
+    pattern:   /logout

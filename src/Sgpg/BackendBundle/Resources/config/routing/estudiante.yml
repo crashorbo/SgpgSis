@@ -1,0 +1,19 @@
+backend_estudiante_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Estudiante:index }
+
+backend_estudiante_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Estudiante:nuevo }
+
+backend_estudiante_ver:
+    pattern:    /ver/{estudiante_id}
+    defaults:   { _controller: BackendBundle:Estudiante:ver }
+
+backend_estudiante_editar:
+  pattern:  /editar/{estudiante_id}
+  defaults: { _controller: BackendBundle:Estudiante:editar }
+
+backend_estudiante_eliminar:
+  pattern:  /eliminar/{estudiante_id}
+  defaults: { _controller: BackendBundle:Estudiante:eliminar }

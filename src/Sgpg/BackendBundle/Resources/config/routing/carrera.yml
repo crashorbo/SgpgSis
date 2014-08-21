@@ -1,0 +1,19 @@
+backend_carrera_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Carrera:index }
+
+backend_carrera_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Carrera:nuevo }
+
+backend_carrera_ver:
+    pattern:    /ver/{carrera_id}
+    defaults:   { _controller: BackendBundle:Carrera:ver }
+
+backend_carrera_editar:
+    pattern:      /editar/{carrera_id}
+    defaults:   { _controller: BackendBundle:Carrera:editar }
+
+backend_carrera_eliminar:
+    pattern:      /eliminar/{carrera_id}
+    defaults:   { _controller: BackendBundle:Carrera:eliminar }

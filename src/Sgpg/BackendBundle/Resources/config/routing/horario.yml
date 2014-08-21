@@ -1,0 +1,11 @@
+backend_horario_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Horario:index }
+
+backend_horario_nuevo:
+    pattern:    /nuevo
+    defaults:   { _controller: BackendBundle:Horario:nuevo }
+
+backend_horario_ver:
+    pattern:    /ver/{horario_id}
+    defaults:   { _controller: BackendBundle:Horario:ver }

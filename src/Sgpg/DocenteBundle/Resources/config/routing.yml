@@ -1,0 +1,61 @@
+docente_portada:
+    pattern:  /
+    defaults: { _controller: DocenteBundle:Default:index }
+
+docente_login:
+    pattern:   /login
+    defaults:  { _controller: DocenteBundle:Default:login }
+
+docente_perfil:
+    pattern:    /perfil
+    defaults:   { _controller: DocenteBundle:Default:perfil }
+
+docente_editar:
+  pattern:  /editar
+  defaults: { _controller: DocenteBundle:Default:editar }
+
+docente_proyecto:
+    pattern:    /proyectos
+    defaults:   { _controller: DocenteBundle:Proyecto:proyecto }
+
+docente_proyecto_ver:
+    pattern:    /proyecto/{proyecto}/ver
+    defaults:   { _controller: DocenteBundle:Proyecto:verproy }
+
+docente_observaciones:
+  pattern:  /proyecto/{seguimiento_id}/observaciones
+  defaults: { _controller: DocenteBundle:Proyecto:observaciones }
+
+docente_tutoria:
+    pattern:    /tutorias
+    defaults:   { _controller: DocenteBundle:Tutoria:tutoria }
+
+docente_tutoria_ver:
+  pattern:  /tutoria/{proyecto_id}/ver
+  defaults: { _controller: DocenteBundle:Tutoria:ver }
+
+docente_tutoria_observaciones:
+  pattern:  /tutoria/{seguimiento_id}/observaciones
+  defaults: { _controller: DocenteBundle:Tutoria:observaciones  }
+
+docente_select_especialidad:
+  pattern:  /docesp
+  defaults: { _controller: DocenteBundle:Default:listaesp }
+
+docente_especialidad_eliminar:
+  pattern: /docesp/eliminar/{esp_id}
+  defaults: { _controller: DocenteBundle:Default:eliminar }
+
+docente_defensa:
+    pattern:    /defensas
+    defaults:   { _controller: DocenteBundle:Defensa:defensa }
+
+
+
+# Ruta para la acción que comprueba el login del docente
+docente_login_check:
+    pattern:   /login_check
+
+# Ruta para la acción de logout de la extranet
+docente_logout:
+    pattern:   /logout

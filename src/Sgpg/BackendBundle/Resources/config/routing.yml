@@ -1,0 +1,47 @@
+backend_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Default:index }
+
+backend_login:
+    pattern:   /login
+    defaults:  { _controller: BackendBundle:Default:login }
+
+# Ruta para la acción que comprueba el login de la extranet
+backend_login_check:
+    pattern:   /login_check
+
+# Ruta para la acción de logout de la extranet
+backend_logout:
+    pattern:   /logout
+
+backend_carrera:
+    resource: "@BackendBundle/Resources/config/routing/carrera.yml"
+    prefix:   /carreras
+
+backend_mencion:
+    resource: "@BackendBundle/Resources/config/routing/mencion.yml"
+    prefix:   /menciones
+
+backend_docente:
+    resource: "@BackendBundle/Resources/config/routing/docente.yml"
+    prefix:   /docentes
+
+backend_estudiante:
+    resource: "@BackendBundle/Resources/config/routing/estudiante.yml"
+    prefix:   /estudiantes
+
+backend_especialidad:
+    resource: "@BackendBundle/Resources/config/routing/especialidad.yml"
+    prefix:   /especialidades
+
+backend_proyecto:
+    resource: "@BackendBundle/Resources/config/routing/proyecto.yml"
+    prefix:   /proyectos
+
+backend_horario:
+    resource: "@BackendBundle/Resources/config/routing/horario.yml"
+    prefix:   /horarios
+
+backend_reporte:
+    resource: "@BackendBundle/Resources/config/routing/reporte.yml"
+    prefix:   /reportes

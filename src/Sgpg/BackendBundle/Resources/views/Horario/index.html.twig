@@ -1,0 +1,77 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Docente
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item active">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-9">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Busqueda">
+                    </div>
+                    <button type="submit" class="btn btn-default">Buscar</button>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <a href="{{ path('backend_horario_nuevo') }}" class="btn btn-primary boton-fix" role="button">Nuevo</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Tipo</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for horario in horarios %}
+                        <tr>
+                            <td>
+                                {{horario.diaReal}}
+                            </td>
+                            <td>
+                                {{horario.tipo}}
+                            </td>
+                            <td>
+                            {{ horario.horaInicio|date('H:i')~' - '~horario.horaFinal|date('H:i')}}
+                            </td>
+                            <td>
+                                {{ horario.activo }}
+                            </td>
+                            <td class="text-right">
+                                <a href="{{ path('backend_horario_ver', {'horario_id': horario.id }) }}" class="btn btn-success" role="button">Ver</a>
+                                <a href="." class="btn btn-warning" role="button">Editar</a>
+                            </td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

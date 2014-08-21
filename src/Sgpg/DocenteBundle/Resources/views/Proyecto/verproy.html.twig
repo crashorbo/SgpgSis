@@ -1,0 +1,119 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Docente - Proyecto
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('docente_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('docente_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('docente_portada') }}">Docente</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('docente_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('docente_proyecto') }}" class="list-group-item active">Proyectos</a>
+        <a href="{{ path('docente_tutoria') }}" class="list-group-item">Tutorias</a>
+        <a href="{{ path('docente_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos Del Postulante</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Nombres:</td>
+                        <td>{{proyecto.estudiante.nombres}}</td>
+                    </tr>
+                    <tr>
+                        <td>Apellido Paterno:</td>
+                        <td>{{proyecto.estudiante.apPaterno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Apellido Materno:</td>
+                        <td>{{proyecto.estudiante.apMaterno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de Registro</td>
+                        <td>{{proyecto.estudiante.fechaRegistro|date('d - M - Y')}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos Del Proyecto</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Proyecto ID:</td>
+                        <td>{{proyecto.id}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre:</td>
+                        <td>{{proyecto.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>Especialidad:   </td>
+                        <td>{{proyecto.especialidad}}</td>
+                    </tr>
+                    <tr>
+                        <td>Descripcion:</td>
+                        <td>{{proyecto.descripcion}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha Creacion:</td>
+                        <td>{{proyecto.fechaCreacion|date('Y-m-d')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha Limite Presentacion: Le quedan <b>{{fecharest}}</b> dias para la culminacion de su proyecto</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Seguimientos</h3>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Descripcion</th>
+                <th>Fecha</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for seguimiento in proyecto.seguimientos %}
+                <tr>
+                    <td>{{seguimiento.tipo}}</td>
+                    <td>{{seguimiento.descripcion }}</td>
+                    <td>{{seguimiento.fechaCreacion|date('d-M-Y')}}</td>
+                    <td>
+                        <a type = "button" class="btn btn-primary" href="{{ path('docente_observaciones', {'seguimiento_id': seguimiento.id }) }}">Observaciones</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

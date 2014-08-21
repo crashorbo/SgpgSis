@@ -1,0 +1,59 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Menciones
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item active">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if mencion.activo %}
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><b>Id:</b></td>
+                            <td>{{ mencion.id }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Carrera:</b></td>
+                            <td>{{ mencion.carrera }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Nombre:</b></td>
+                            <td>{{ mencion.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Descripcion:</b></td>
+                            <td>{{ mencion.descripcion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a type="button" class="btn btn-warning" href="{{ path('backend_mencion_editar', {'mencion_id': mencion.id }) }}">Editar</a>
+                <a type="button" class="btn btn-danger" href="{{ path('backend_mencion_eliminar', {'mencion_id': mencion.id }) }}">Eliminar</a>
+                {% else %}
+                    <p>Esta Mencion ha sido eliminada, desea volver a activarla?</p>
+                    <a type="button" class="btn btn-success" href="{{ path('backend_mencion_eliminar', {'mencion_id': mencion.id }) }}">Aceptar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

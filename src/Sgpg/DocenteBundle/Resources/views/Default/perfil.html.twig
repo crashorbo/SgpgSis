@@ -1,0 +1,170 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Estudiante - Inicio
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('docente_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('docente_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('docente_portada') }}">Docente</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('docente_portada') }}" class="list-group-item active">Inicio</a>
+        <a href="{{ path('docente_proyecto') }}" class="list-group-item">Proyectos</a>
+        <a href="{{ path('docente_tutoria') }}" class="list-group-item">Tutorias</a>
+        <a href="{{ path('docente_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Perfil Docente</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <tr>
+                    <td>Nombres:</td>
+                    <td>{{usuario.nombres}}</td>
+                </tr>
+                <tr>
+                    <td>Apellido Paterno:</td>
+                    <td>{{usuario.apPaterno}}</td>
+                </tr>
+                <tr>
+                    <td>Apellido Materno:</td>
+                    <td>{{usuario.apMaterno}}</td>
+                </tr>
+                <tr>
+                    <td>Cedula de Identidad:</td>
+                    <td>{{usuario.ci}}</td>
+                </tr>
+                <tr>
+                    <td>Telefono:</td>
+                    <td>{{usuario.telefono}}</td>
+                </tr>
+                <tr>
+                    <td>Celular:</td>
+                    <td>{{usuario.celular}}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{usuario.email}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de Registro</td>
+                    <td>{{usuario.fechaRegistro|date('d-M-Y')}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-9">
+                <a type ="button" class="btn btn-warning" href="{{ path('docente_editar') }}">Editar Perfil</a>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Agregar Especialidad</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Especialidades</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Carrera</th>
+                        <th>Especialidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for docesp in docesps %}
+                    <tr>
+                        <td>
+                            {{ docesp.especializacion.carrera }}
+                        </td>
+                        <td>
+                            {{ docesp.especializacion }}
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-danger" href="{{ path('docente_especialidad_eliminar',{'esp_id': docesp.especializacion.id}) }}">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Seleccionar Especialidad</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{{ path('docente_perfil') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal" role="form">
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Carrera</label>
+                    <div class="col-sm-10">
+                        {{ form_errors(form.carrera) }}
+                        {{ form_widget(form.carrera, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Especialidad</label>
+                    <div class="col-sm-10">
+                        {{ form_errors(form.especialidad) }}
+                        {{ form_widget(form.especialidad, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                </div>
+                {{ form_widget(form) }}
+            </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(function(){
+            $("#docenteesp_carrera").change(function(){
+                var data = {
+                    carrera_id: $(this).val()
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{ path("docente_select_especialidad") }}',
+                    data: data,
+                    success: function(data) {
+                        $('#docenteesp_especialidad').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,21 @@
+<pdf>
+    <dynamic-page>
+        <h1>Ingenieria de Sistemas e Informatica</h1>
+        <table>
+            <tr color="white" border.color="black" background.color="black" padding-left="10">
+                <td height="12" padding-left="10">Proyecto</td>
+                <td padding-left="10">Especialidad</td>
+            </tr>
+            {% for especialidad in especialidades %}
+                {% for proyecto in proyectos %}
+                    {% if (proyecto.especialidad.nombre == especialidad.nombre) %}
+                    <tr>
+                        <td>{{ proyecto.nombre }}</td>
+                        <td>{{ proyecto.especialidad.nombre }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </table>
+    </dynamic-page>
+</pdf>

@@ -1,0 +1,56 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Docente - Proyecto
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('docente_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('docente_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('docente_portada') }}">Docente</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('docente_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('docente_proyecto') }}" class="list-group-item active">Proyectos</a>
+        <a href="{{ path('docente_tutoria') }}" class="list-group-item">Tutorias</a>
+        <a href="{{ path('docente_defensa') }}" class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+   <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lista de Proyectos</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <th>Codigo</th>
+                    <th>Postulante</th>
+                    <th>Proyecto</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody></tbody>
+                {% for tribunal in tribunales %}
+                    <tr>
+                        <td>{{ tribunal.proyecto.id}}</td>
+                        <td>{{ tribunal.proyecto.estudiante.nombres~' '~tribunal.proyecto.estudiante.apPaterno~' '~tribunal.proyecto.estudiante.apMaterno }}</td>
+                        <td>{{ tribunal.proyecto.descripcion}}</td>
+                        <td><a type = "button" href="{{ path('docente_proyecto_ver', {'proyecto': tribunal.proyecto.id }) }}" class="btn btn-warning">Ver</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

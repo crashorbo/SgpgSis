@@ -1,0 +1,69 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Menciones
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item ">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item active">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                {% if especialidad.estado %}
+                    <form action="{{ path('backend_especialidad_editar',{'especialidad_id': especialidad.id}) }}" method="POST" {{ form_enctype(form) }} class="form-horizontal" role="form">
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Carrera</label>
+                            <div class="col-sm-10">
+                                {{ form_errors(form.carrera) }}
+                                {{ form_widget(form.carrera, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
+                            <div class="col-sm-10">
+                                {{ form_errors(form.nombre) }}
+                                {{ form_widget(form.nombre, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Descripcion</label>
+                            <div class="col-sm-10">
+                                {{ form_errors(form.descripcion) }}
+                                {{ form_widget(form.descripcion, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a type="button" class="btn btn-danger" href="{{ path('backend_especialidad_eliminar', {'especialidad_id': especialidad.id }) }} ">Eliminar</a>
+                        {{ form_widget(form) }}
+                    </form>
+                {% else %}
+                    <p>Esta Especialidad ha sido eliminada, desea volver a activarla?</p>
+                    <a type="button" class="btn btn-success" href="{{ path('backend_especialidad_eliminar', {'especialidad_id': especialidad.id }) }} ">Aceptar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+carrera:
+    resource: "@CarreraBundle/Resources/config/routing.yml"
+    prefix:   /
+
+proyecto:
+    resource: "@ProyectoBundle/Resources/config/routing.yml"
+    prefix:   /
+
+frontend:
+    resource: "@FrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
+backend:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+docente:
+    resource: "@DocenteBundle/Resources/config/routing.yml"
+    prefix:   /docente
+
+estudiante:
+    resource: "@EstudianteBundle/Resources/config/routing.yml"
+    prefix:   /estudiante
+

@@ -1,0 +1,102 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Administracion - Carrera
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('backend_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('backend_carrera_portada') }}" class="list-group-item ">Carrera</a>
+        <a href="{{ path('backend_mencion_portada')}}" class="list-group-item ">Mencion</a>
+        <a href="{{ path('backend_especialidad_portada') }}" class="list-group-item">Especialidad</a>
+        <a href="{{ path('backend_docente_portada')}}" class="list-group-item">Docente</a>
+        <a href="{{ path('backend_estudiante_portada')}}" class="list-group-item">Estudiante</a>
+        <a href="{{ path('backend_proyecto_portada') }}" class="list-group-item active">Proyecto</a>
+        <a href="{{ path('backend_horario_portada') }}" class="list-group-item">Horario</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos Del Proyecto</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <td><b>Proyecto Id:</b></td>
+                    <td>{{proyecto.id}}</td>
+                </tr>
+                <tr>
+                    <td><b>Nombre:</b></td>
+                    <td>{{proyecto.nombre}}</td>
+                </tr>
+                <tr>
+                    <td><b>Especialidad:</b>   </td>
+                    <td>{{proyecto.especialidad}}</td>
+                </tr>
+                <tr>
+                    <td><b>Fecha Creacion:</b></td>
+                    <td>{{proyecto.fechaCreacion|date('Y-m-d')}}</td>
+                </tr>
+                <tr>
+                    <td><b>Fecha Limite Presentacion:</b></td> <td>Quedan <b>{{fecharest}}</b> dias para la culminacion del proyecto</td>
+                </tr>
+                <tr>
+                    <td><b>Descripcion:</b></td>
+                    <td>{{proyecto.descripcion}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tutor</h3>
+        </div>
+        <div class="panel-body">
+            {{proyecto.tutor}}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tribunales</h3>
+        </div>
+        <div class="panel-body">
+            {% for tribunal in tribunales %}
+                <p>{{tribunal.tribunal.nombres}}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Seguimientos</h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for seguimiento in proyecto.seguimientos %}
+                <tr>
+                    <td>{{seguimiento.tipo}}</td>
+                    <td>{{seguimiento.fechaCreacion|date('d-M-Y')}}</td>
+                    <td>
+                        <a type = "button" class="btn btn-primary" href="#">Observaciones</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

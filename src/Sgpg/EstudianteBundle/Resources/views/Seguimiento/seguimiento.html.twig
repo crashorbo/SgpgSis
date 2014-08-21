@@ -1,0 +1,59 @@
+{% extends '::backend.html.twig' %}
+
+{% block titulo %}
+    Estudiante - Proyecto
+{% endblock %}
+
+{% block cerrarsesion %}
+    <li><a href="{{ path('estudiante_logout') }}">Cerrar Sesion</a></li>
+    <li><a href="{{ path('estudiante_perfil') }}">Perfil</a>
+{% endblock %}
+
+{% block tipousuario %}
+    <a class="navbar-brand" href="{{ path('estudiante_portada') }}">Estudiante</a>
+{% endblock %}
+
+{% block usuariolog %}
+    {{usuario}}
+{% endblock %}
+
+{% block navegacion %}
+    <div class="list-group">
+        <a href="{{ path('estudiante_portada') }}" class="list-group-item">Inicio</a>
+        <a href="{{ path('estudiante_proyecto') }}" class="list-group-item ">Proyecto</a>
+        <a href="{{ path('estudiante_seguimiento') }}" class="list-group-item active">Seguimientos</a>
+        <a href="{{ path('estudiante_defensa') }} " class="list-group-item">Defensas</a>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <a type="button" class="btn btn-primary" href = "{{ path('estudiante_seguimiento_nuevo') }}">Nuevo Seguimiento</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lista de Seguimientos</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {% for seguimiento in seguimientos %}
+                    <li class="list-group-item">
+                        <p><b>Tipo Seguimiento:</b> {{ seguimiento.tipo }}</p>
+                        <p><b>Descripcion:</b> {{ seguimiento.descripcion }}</p>
+                        <p>
+                            <a type="button" class="btn btn-info"  href="{{ path('estudiante_observacion', {'seguimiento_id': seguimiento.id}) }}">Ver Observaciones</a>
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}

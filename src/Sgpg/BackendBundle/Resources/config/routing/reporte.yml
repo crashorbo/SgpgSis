@@ -1,0 +1,15 @@
+backend_reporte_portada:
+    pattern:    /
+    defaults:   { _controller: BackendBundle:Reporte:index }
+
+backend_reporte_listado:
+    pattern:    /imprimir/listproy.{_format}
+    defaults:   { _controller: BackendBundle:Reporte:listproy, _format: pdf }
+    requirements:
+        _format: html|pdf
+
+backend_reporte_listesp:
+    pattern:    /imprimir/listesp.{_format}
+    defaults:   { _controller: BackendBundle:Reporte:listesp, _format: pdf }
+    requirements:
+        _format: html|pdf
